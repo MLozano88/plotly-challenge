@@ -5,10 +5,14 @@ function makePlots(id) {
         console.log(values)
         var x_value =  data.samples[0].sample_values.slice(0,10).reverse();
         console.log(x_value)
+        var bubble_y_val = data.samples[0].sample_values;
+        console.log(bubble_y_val)
         var hovertext =  data.samples[0].otu_labels.slice(0,10);
         console.log (hovertext)
+        var bubble_text = data.samples[0].otu_labels;
+        console.log(bubble_text)
     // Top 10 otu ids in reverse order 
-        var OTU_top = ( values.slice(0, 10)).reverse();
+        var OTU_top = (values.slice(0, 10)).reverse();
     // get the otu id's to the desired form for the plot
         var OTU_id = OTU_top.map(d => "OTU " + d);
         console.log(`OTU IDS: ${OTU_id}`)
@@ -46,13 +50,13 @@ function makePlots(id) {
          // The bubble chart
          var trace1 = {
             x: values,
-            y: x_value,
+            y: bubble_y_val,
             mode: "markers",
             marker: {
-                size: x_value,
+                size: bubble_y_val,
                 color: values
             },
-            text:  hovertext
+            text:  bubble_text
 
         };
         
@@ -73,7 +77,7 @@ function makePlots(id) {
         };
 
     // create the bubble plot
-    Plotly.newPlot("bubble", data_2, layout_2, {displayModeBar: false}, {scrollZoom: true});
+    Plotly.newPlot("bubble", data_2, layout_2, {displayModeBar: false, scrollZoom: true});
     
     });
 }
