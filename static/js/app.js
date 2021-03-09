@@ -3,20 +3,20 @@ function makePlots(id) {
         console.log(data)
         var values = data.samples[0].otu_ids;
         console.log(values)
-        var labels =  data.samples[0].sample_values.slice(0,10).reverse();
-        console.log(labels)
+        var x_value =  data.samples[0].sample_values.slice(0,10).reverse();
+        console.log(x_value)
         var hovertext =  data.samples[0].otu_labels.slice(0,10);
         console.log (hovertext)
     // Top 10 otu ids in reverse order 
-        var OTU_top = ( data.samples[0].otu_ids.slice(0, 10)).reverse();
+        var OTU_top = ( values.slice(0, 10)).reverse();
     // get the otu id's to the desired form for the plot
         var OTU_id = OTU_top.map(d => "OTU " + d);
         console.log(`OTU IDS: ${OTU_id}`)
     // Top 10 labels for the y-axis
-        var labels =  data.samples[0].otu_labels.slice(0,10);
+        var labels =  hovertext.slice(0,10);
         console.log(`OTU_labels: ${labels}`)
         var trace = {
-            x: x_values,
+            x: x_value,
             y: OTU_id,
             text: labels,
             marker: {
@@ -45,14 +45,14 @@ function makePlots(id) {
         
          // The bubble chart
          var trace1 = {
-            x: data.samples[0].otu_ids,
-            y: data.samples[0].sample_values,
+            x: values,
+            y: x_value,
             mode: "markers",
             marker: {
-                size: data.samples[0].sample_values,
-                color: data.samples[0].otu_ids
+                size: x_value,
+                color: values
             },
-            text:  data.samples[0].otu_labels
+            text:  hovertext
 
         };
         
@@ -71,3 +71,5 @@ function makePlots(id) {
     
     });
 }
+
+makePlots();
