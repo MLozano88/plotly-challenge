@@ -20,7 +20,7 @@ function makePlots(id) {
             y: OTU_id,
             text: labels,
             marker: {
-            color: 'blue'},
+            color: 'steelblue'},
             type:"bar",
             orientation: "h",
         };
@@ -33,15 +33,15 @@ function makePlots(id) {
                 tickmode:"linear",
             },
             margin: {
-                l: 100,
-                r: 100,
-                t: 100,
-                b: 100
+                l: 70,
+                r: 50,
+                t: 35,
+                b: 50
             }
         };
 
     // create the bar plot
-    Plotly.newPlot("bar", data, layout);
+    Plotly.newPlot("bar", data, layout, {displayModeBar: false});
         
          // The bubble chart
          var trace1 = {
@@ -63,11 +63,17 @@ function makePlots(id) {
         var layout_2 = {
             xaxis:{title: "OTU ID"},
             height: 600,
-            width: 1000
+            width: 1500,
+            margin: {
+                l: 25,
+                r: 50,
+                t: 35,
+                b: 50
+            }
         };
 
     // create the bubble plot
-    Plotly.newPlot("bubble", data_2, layout_2);
+    Plotly.newPlot("bubble", data_2, layout_2, {displayModeBar: false}, {scrollZoom: true});
     
     });
 }
