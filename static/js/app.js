@@ -85,10 +85,27 @@ function makePlots(id) {
 makePlots();
 
 function displayMetadata(id) {
+    //read in the json file
     d3.json("samples.json").then((data) => {
-
+        //create a variable for the metadata
         var metadata = data.metadata;
 
         console.log(metadata)
-    })
+        //filter the information by the ID
+        var filter = metadata.filter(meta => meta.id.toString() === id)[0];
+        //create a variable for the demographic table
+        var demographics = d3.select("#sample-metadata");
+        //empties the table
+        demographics.html("");
+        //information related to the ID will be entered into the demgraphic table
+        Object.entries(filter).forEach((key) => {
+            demographics.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");
+        });
+
+    });
+}
+
+function init() {
+    
+
 }
