@@ -82,8 +82,6 @@ function makePlots(id) {
     });
 }
 
-makePlots();
-
 function displayMetadata(id) {
     //read in the json file
     d3.json("samples.json").then((data) => {
@@ -105,7 +103,26 @@ function displayMetadata(id) {
     });
 }
 
-function init() {
-    
-
+//this will handle the event change when we select a new ID
+function optionChanged(id) {
+    makePlots(id);
+    displayMetadata(id);
 }
+
+//This will append the selected demographic information to the table
+function init() {
+    //create variable for the dropdown menu
+    var dropdown = d3.select("#selDataset");
+    //read in the metadata
+    d3.json("samples.json").then((data) => {
+        console.log(data)
+        //append data to the dropdown menu
+        data.names.forEach(function(name) {
+            dropdown.append("option").text(name).property("value");
+        });
+        makePlots(data.names[0]);
+        displayMetadata(data.names[0]);
+    });
+}
+
+init();
